@@ -1,11 +1,12 @@
 "use client";
 import React, { useEffect, useState, useRef } from "react";
+import MagicBento from "./MagicBento";
 
 const lerp = (a, b, t) => a + (b - a) * t;
 const smoothstep = (t) => t * t * (3 - 2 * t);
 
 const frames = Array.from({ length: 11 }, (_, i) => `/frames/${i + 1}.png`);
-const frameScales = [2.4, 2.4, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2,2.2];
+const frameScales = [2.4, 2.4, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2];
 
 
 const sectionsData = [
@@ -109,6 +110,12 @@ export default function App() {
 
   // Compute Eased Progress
   const smoothP = smoothstep(scrollProgress);
+
+  // MagicBento visibility logic
+  // Frame 9 ends around progress = 9/13 (~0.69). We fade in the Bento smoothly after that.
+  let bentoProgress = (scrollProgress - 0.72) / 0.15;
+  bentoProgress = Math.max(0, Math.min(1, bentoProgress));
+  const bentoSmooth = smoothstep(bentoProgress);
 
   // Depth Lighting Effect (0% to 50% to 100%)
   let brightness = lerp(0.7, 1.0, smoothP * 2);
@@ -342,6 +349,35 @@ export default function App() {
           />
         </>
       )}
+
+      {/* Magic Bento Overlay - Appears at the end of the scroll sequence */}
+      <div 
+        className="fixed inset-0 flex items-center justify-center z-40 pointer-events-none"
+        style={{
+          opacity: bentoSmooth,
+          transform: `translateY(${(1 - bentoSmooth) * 40}px)`,
+          transition: 'opacity 0.08s ease-out, transform 0.1s ease-out'
+        }}
+      >
+        <div 
+          className="w-full max-w-6xl px-4 md:px-8"
+          style={{ pointerEvents: bentoSmooth > 0.5 ? 'auto' : 'none' }}
+        >
+          <MagicBento 
+            textAutoHide={true}
+            enableStars={true}
+            enableSpotlight={true}
+            enableBorderGlow={true}
+            enableTilt={false}
+            enableMagnetism={false}
+            clickEffect={true}
+            spotlightRadius={400}
+            particleCount={12}
+            glowColor="132, 0, 255"
+            disableAnimations={false}
+          />
+        </div>
+      </div>
     </div>
   );
 }
