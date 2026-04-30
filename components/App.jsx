@@ -5,6 +5,8 @@ const lerp = (a, b, t) => a + (b - a) * t;
 const smoothstep = (t) => t * t * (3 - 2 * t);
 
 const frames = Array.from({ length: 13 }, (_, i) => `/frames/${i + 1}.png`);
+const frameScales = [2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2];
+
 
 const sectionsData = [
   { title: "Somewhere in the digital void...", subtitle: "01 / 13" },
@@ -256,7 +258,8 @@ export default function App() {
                   style={{
                     opacity: activeFrame === idx ? 1 : 0,
                     mixBlendMode: "screen",
-                    filter: `brightness(${brightness}) contrast(${contrast}) drop-shadow(0px ${shadowY}px ${shadowBlur}px rgba(99,102,241,${shadowOpacity})) blur(${blurAmt}px)`
+                    transform: `scale(${frameScales[idx]})`,
+                    filter: `brightness(${brightness}) contrast(${contrast}) drop-shadow(0px ${shadowY}px ${shadowBlur}px rgba(99,102,241,${shadowOpacity}))`
                   }}
                 />
               ))}
