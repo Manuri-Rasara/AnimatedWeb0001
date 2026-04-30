@@ -4,24 +4,24 @@ import React, { useEffect, useState, useRef } from "react";
 const lerp = (a, b, t) => a + (b - a) * t;
 const smoothstep = (t) => t * t * (3 - 2 * t);
 
-const frames = Array.from({ length: 13 }, (_, i) => `/frames/${i + 1}.png`);
-const frameScales = [2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2];
+const frames = Array.from({ length: 11 }, (_, i) => `/frames/${i + 1}.png`);
+const frameScales = [2.4, 2.4, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2,2.2];
 
 
 const sectionsData = [
-  { title: "Somewhere in the digital void...", subtitle: "01 / 13" },
-  { title: "Something is coming closer", subtitle: "02 / 13" },
-  { title: "Focused. Locked in.", subtitle: "03 / 13" },
-  { title: "Adaptable to any workflow", subtitle: "04 / 13" },
-  { title: "Caffeinated and ready", subtitle: "05 / 13" },
-  { title: "Always online. Always creative.", subtitle: "06 / 13" },
-  { title: "Deep in the details", subtitle: "07 / 13" },
-  { title: "Starting to say something...", subtitle: "08 / 13" },
-  { title: "Hello! I've been waiting for you 👋", subtitle: "09 / 13" },
-  { title: "Let's connect", subtitle: "10 / 13" },
-  { title: "Seriously, call me", subtitle: "11 / 13" },
-  { title: "Watching. Learning. Adapting.", subtitle: "12 / 13" },
-  { title: "The stage is yours →", subtitle: "13 / 13" }
+  // { title: "Somewhere in the digital void...", subtitle: "01 / 13" },
+  // { title: "Something is coming closer", subtitle: "02 / 13" },
+  // { title: "Focused. Locked in.", subtitle: "03 / 13" },
+  { title: "Adaptable to any workflow", subtitle: "01 / 13" },
+  { title: "Caffeinated and ready", subtitle: "02 / 13" },
+  { title: "Always online. Always creative.", subtitle: "03 / 13" },
+  { title: "Deep in the details", subtitle: "04 / 13" },
+  { title: "Hello! I've been waiting for you 👋",subtitle: "05 / 13" },
+  { title: "Let's connect",  subtitle: "06 / 13" },
+  { title: "Let's connect", subtitle: "07 / 13" },
+  { title: "Watching. Learning. Adapting.", subtitle: "08 / 13" },
+  { title: "The stage is yours →", subtitle: "09 / 13" },
+  // { title: "The stage is yours →", subtitle: "10 / 13" }
 ];
 
 export default function App() {
@@ -237,7 +237,7 @@ export default function App() {
       <div className="w-full md:w-[55%] sticky top-0 h-screen overflow-hidden flex items-center justify-center z-10 pointer-events-none">
         <div 
           className="relative w-full max-w-[600px] aspect-square md:aspect-auto md:h-[800px] flex items-center justify-center"
-          style={{ perspective: "1200px" }}
+          style={{ perspective: "0px" }}
         >
           {/* Anti-gravity floating wrapper */}
           <div className="relative w-full h-full flex flex-col items-center justify-center float-anim">
@@ -259,7 +259,7 @@ export default function App() {
                     opacity: activeFrame === idx ? 1 : 0,
                     mixBlendMode: "screen",
                     transform: `scale(${frameScales[idx]})`,
-                    filter: `brightness(${brightness}) contrast(${contrast}) drop-shadow(0px ${shadowY}px ${shadowBlur}px rgba(99,102,241,${shadowOpacity}))`
+                   
                   }}
                 />
               ))}
