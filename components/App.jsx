@@ -2,7 +2,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import MagicBento from "./MagicBento";
 import Loader from "./Loader";
-import ShineButton from "./shineButton"
+import ShineButton from "./shineButton";
+import SplitText from "./SplitText";
 
 const lerp = (a, b, t) => a + (b - a) * t;
 const smoothstep = (t) => t * t * (3 - 2 * t);
@@ -312,9 +313,20 @@ export default function App() {
                   <p className="text-indigo-400 font-mono text-sm md:text-base tracking-widest mb-4">
                     {section.subtitle}
                   </p>
-                  <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight text-white/90 drop-shadow-2xl">
-                    {section.title}
-                  </h2>
+                  {idx === 0 ? (
+                    <SplitText
+                      text={section.title}
+                      className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight text-white/90 drop-shadow-2xl"
+                      delay={50}
+                      duration={1.25}
+                      tag="h2"
+                      textAlign="left"
+                    />
+                  ) : (
+                    <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight text-white/90 drop-shadow-2xl">
+                      {section.title}
+                    </h2>
+                  )}
                   
                   {idx === 0 && (
                     <div className="mt-8 scale-75 origin-left">
@@ -322,6 +334,8 @@ export default function App() {
                       <ShineButton/>
                     </div>
                   )}
+
+                  
                   
                   {/* CTA on last frame */}
                   {idx === 12 && (
