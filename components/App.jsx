@@ -206,37 +206,41 @@ export default function App() {
       `}</style>
       
       {/* Parallax Layers */}
-      <div className="fixed inset-0 pointer-events-none z-0" style={{ perspective: '1000px' }}>
-        {/* Depth Grid Floor */}
-        <div 
-          className="absolute inset-x-0 bottom-[-50vh] h-[150vh] w-[200vw] left-[-50vw]"
-          style={{
-            transformOrigin: 'top',
-            transform: 'rotateX(75deg)',
-            backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 49px, #1a1a2e 50px), repeating-linear-gradient(90deg, transparent, transparent 49px, #1a1a2e 50px)`,
-            backgroundSize: '50px 50px',
-            backgroundPosition: `0px ${scrollProgress * 200}px`
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-black/80 to-black pointer-events-none" />
+      <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
+        <div className="sticky top-0 w-full h-screen" style={{ perspective: '1000px' }}>
+          {/* Depth Grid Floor */}
+          <div 
+            className="absolute inset-x-0 bottom-[-50vh] h-[150vh] w-[200vw] left-[-50vw]"
+            style={{
+              transformOrigin: 'top',
+              transform: 'rotateX(75deg)',
+              backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 49px, #1a1a2e 50px), repeating-linear-gradient(90deg, transparent, transparent 49px, #1a1a2e 50px)`,
+              backgroundSize: '50px 50px',
+              backgroundPosition: `0px ${scrollProgress * 200}px`
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-transparent via-black/80 to-black pointer-events-none" />
+        </div>
       </div>
 
-      <div className="fixed inset-0 pointer-events-none z-0 flex items-center justify-center overflow-hidden">
-        {/* Layer 1: Slow blurred purple orb */}
-        <div 
-          className="absolute w-[600px] h-[600px] rounded-full bg-purple-900/20 blur-[100px]"
-          style={{ transform: `translateY(${scrollProgress * 100}px)` }}
-        />
-        {/* Layer 2: Medium indigo ring */}
-        <div 
-          className="absolute w-[400px] h-[400px] rounded-full border-[40px] border-indigo-900/10 blur-[20px]"
-          style={{ transform: `translateY(${scrollProgress * -150}px) scale(${1 + scrollProgress * 0.5})` }}
-        />
-        {/* Layer 3: Fast subtle light flare */}
-        <div 
-          className="absolute bottom-1/4 w-[300px] h-[100px] rounded-full bg-indigo-500/10 blur-[50px]"
-          style={{ transform: `translateY(${scrollProgress * -300}px)` }}
-        />
+      <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
+        <div className="sticky top-0 w-full h-screen flex items-center justify-center overflow-hidden">
+          {/* Layer 1: Slow blurred purple orb */}
+          <div 
+            className="absolute w-[600px] h-[600px] rounded-full bg-purple-900/20 blur-[100px]"
+            style={{ transform: `translateY(${scrollProgress * 100}px)` }}
+          />
+          {/* Layer 2: Medium indigo ring */}
+          <div 
+            className="absolute w-[400px] h-[400px] rounded-full border-[40px] border-indigo-900/10 blur-[20px]"
+            style={{ transform: `translateY(${scrollProgress * -150}px) scale(${1 + scrollProgress * 0.5})` }}
+          />
+          {/* Layer 3: Fast subtle light flare */}
+          <div 
+            className="absolute bottom-1/4 w-[300px] h-[100px] rounded-full bg-indigo-500/10 blur-[50px]"
+            style={{ transform: `translateY(${scrollProgress * -300}px)` }}
+          />
+        </div>
       </div>
 
       {/* Split Screen Layout */}
@@ -351,33 +355,38 @@ export default function App() {
       )}
 
       {/* Magic Bento Overlay - Appears at the end of the scroll sequence */}
-      <div 
-        className="fixed inset-0 flex items-center justify-center z-40 pointer-events-none"
-        style={{
-          opacity: bentoSmooth,
-          transform: `translateY(${(1 - bentoSmooth) * 40}px)`,
-          transition: 'opacity 0.08s ease-out, transform 0.1s ease-out'
-        }}
-      >
+      <div className="absolute inset-0 w-full h-full z-40 pointer-events-none">
         <div 
-          className="w-full max-w-6xl px-4 md:px-8"
-          style={{ pointerEvents: bentoSmooth > 0.5 ? 'auto' : 'none' }}
+          className="sticky top-0 w-full h-screen flex items-center justify-center"
+          style={{
+            opacity: bentoSmooth,
+            transform: `translateY(${(1 - bentoSmooth) * 40}px)`,
+            transition: 'opacity 0.08s ease-out, transform 0.1s ease-out'
+          }}
         >
-          <MagicBento 
-            textAutoHide={true}
-            enableStars={true}
-            enableSpotlight={true}
-            enableBorderGlow={true}
-            enableTilt={false}
-            enableMagnetism={false}
-            clickEffect={true}
-            spotlightRadius={400}
-            particleCount={12}
-            glowColor="132, 0, 255"
-            disableAnimations={false}
-          />
+          <div 
+            className="w-full max-w-6xl px-4 md:px-8"
+            style={{ pointerEvents: bentoSmooth > 0.5 ? 'auto' : 'none' }}
+          >
+            <MagicBento 
+              textAutoHide={true}
+              enableStars={true}
+              enableSpotlight={true}
+              enableBorderGlow={true}
+              enableTilt={false}
+              enableMagnetism={false}
+              clickEffect={true}
+              spotlightRadius={400}
+              particleCount={12}
+              glowColor="132, 0, 255"
+              disableAnimations={false} 
+            />
+          </div>
         </div>
       </div>
+     
     </div>
+
+   
   );
 }
