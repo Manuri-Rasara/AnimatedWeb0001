@@ -1,6 +1,8 @@
 "use client";
 import React, { useEffect, useState, useRef } from "react";
 import MagicBento from "./MagicBento";
+import Loader from "./Loader";
+import ShineButton from "./shineButton"
 
 const lerp = (a, b, t) => a + (b - a) * t;
 const smoothstep = (t) => t * t * (3 - 2 * t);
@@ -206,7 +208,7 @@ export default function App() {
       `}</style>
       
       {/* Parallax Layers */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
+      <div className="fixed inset-0 w-full h-full pointer-events-none z-0">
         <div className="sticky top-0 w-full h-screen" style={{ perspective: '1000px' }}>
           {/* Depth Grid Floor */}
           <div 
@@ -314,6 +316,13 @@ export default function App() {
                     {section.title}
                   </h2>
                   
+                  {idx === 0 && (
+                    <div className="mt-8 scale-75 origin-left">
+                    
+                      <ShineButton/>
+                    </div>
+                  )}
+                  
                   {/* CTA on last frame */}
                   {idx === 12 && (
                     <button className="mt-12 pointer-events-auto bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-4 rounded-full font-semibold tracking-wide transition-all duration-300 shadow-[0_0_30px_rgba(99,102,241,0.5)] hover:shadow-[0_0_50px_rgba(99,102,241,0.8)] self-start flex items-center gap-3 group">
@@ -365,7 +374,7 @@ export default function App() {
           }}
         >
           <div 
-            className="w-full max-w-6xl px-4 md:px-8"
+            className="w-full max-w-6xl px-4 md:px-8 md:m-8 m-0"
             style={{ pointerEvents: bentoSmooth > 0.5 ? 'auto' : 'none' }}
           >
             <MagicBento 

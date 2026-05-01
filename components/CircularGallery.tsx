@@ -521,11 +521,11 @@ class App {
         text: 'Good Boy'
       },
       {
-        image: "./projects/11.png",
+        image: "./projects/3.png",
         text: 'Coastline'
       },
       {
-        image: "./projects/12.png",
+        image: "./projects/1.png",
         text: 'Palm Trees'
       }
     ];
